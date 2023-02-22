@@ -1,0 +1,14 @@
+Content-Type: text/html; charset=utf-8
+Date: Fri, 17 Feb 2023 16:04:23 GMT
+Server: nginx/1.22.1
+X-Powered-By: Next.js
+Pagespeed: off
+Modpagespeed: off
+Pagespeedfilters: -move_css_to_head,-combine_css,-combine_javascript,-combine_heads,-extend_cache,-defer_javascript,-collapse_whitespace,-prioritize_critical_css
+Set-Cookie: ab_test_lp={}; Max-Age=86400; path=/; sameSite=lax; domain=autoscout24.fr
+Cache-Control: private, no-cache, no-store, max-age=0, must-revalidate
+Content-Encoding: gzip
+X-Cache: Miss from cloudfront
+Via: 1.1 b2ba040f19ad0239b9239a26b1640b9e.cloudfront.net (CloudFront)
+X-Amz-Cf-Pop: CDG52-P4
+X-Amz-Cf-Id: 1rolwFOTD-EYu-KHoL-edDZaElfiJR2thO7q2WrS__tQHDbF9qSNDA==
