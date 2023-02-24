@@ -3,6 +3,7 @@ from twisted.internet import reactor
 import scrapy
 from scrapy.crawler import CrawlerRunner
 from scrapy import signals
+
 from .settings import settings
 
 class TwistedRunner(CrawlerRunner):

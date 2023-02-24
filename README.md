@@ -1,5 +1,6 @@
 # linkincar_server
 
+export PYTHONPATH=.
 
 ## run server
 

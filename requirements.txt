@@ -6,6 +6,7 @@ charset-normalizer==3.0.1
 constantly==15.1.0
 cryptography==39.0.1
 cssselect==1.2.0
+dict-deep==4.1.2
 filelock==3.9.0
 hyperlink==21.0.0
 idna==3.4
