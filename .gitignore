@@ -1,6 +1,6 @@
 twistd.log
 twistd.pid
-__pycache__/
+**/__pycache__
 .scrapy/
 .vscode/
 

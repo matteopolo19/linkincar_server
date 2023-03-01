@@ -13,6 +13,7 @@ def autoscout(request):
     url += addArgumentToUrl('&kmfrom=',request.args.get(b'minKm'))
     url += addArgumentToUrl('&kmto=',request.args.get(b'maxKm'))
     url += addArgumentToUrl('&page=',request.args.get(b'page'), '&page=1')
+    print("autoscout :: url", url)
     a = Runner.crawl(AutoscoutSpider, url=url)
     a.addCallback(getSpiderResult)
     return a

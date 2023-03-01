@@ -13,6 +13,7 @@ def subito(request):
     url += addArgumentToUrl('&pe=',request.args.get(b'maxPrice'))
     url += addArgumentToUrl('&ms=',request.args.get(b'minKm'))
     url += addArgumentToUrl('&me=',request.args.get(b'maxKm'))
+    print("subito :: url", url)
     a = Runner.crawl(SubitoSpider, url=url)
     a.addCallback(getSpiderResult)
     return a

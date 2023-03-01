@@ -13,7 +13,7 @@ def automobile(request):
     url += addArgumentToUrl('&prezzo_a=',request.args.get(b'maxPrice'))
     url += addArgumentToUrl('&km_min=',request.args.get(b'minKm'), '', '_km')
     url += addArgumentToUrl('&km_max=',request.args.get(b'maxKm'), '', '_km')
-   
+    print("automobile :: url", url)
     a = Runner.crawl(AutomobileSpider, url=url)
     a.addCallback(getSpiderResult)
     return a
