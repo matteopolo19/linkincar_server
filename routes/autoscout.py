@@ -4,7 +4,7 @@ from scrap.spider.autoscout_spider import AutoscoutSpider
 def autoscout(request):
     """Serve request for scrape"""
     Runner = TwistedRunner()
-    url= "https://www.autoscout24.fr/lst"
+    url= "https://www.autoscout24.com/lst"
     url += addArgumentToUrl('/', request.args.get(b'brand'))
     url += addArgumentToUrl('/',request.args.get(b'model'))
     url += '?sort=price&desc=0&damaged_listing=exclude'
