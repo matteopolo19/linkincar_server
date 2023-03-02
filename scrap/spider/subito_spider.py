@@ -20,7 +20,6 @@ class SubitoSpider(scrapy.Spider):
             except KeyError:
                 print("error KeyError")
                 image = None
-            print("features['/power'] ---------", self.getObject(features, "/power.values", "value"))
             yield {
                 "index": i,
                 'id': car["urn"],

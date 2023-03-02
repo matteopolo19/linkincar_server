@@ -3,6 +3,7 @@ from klein import Klein
 from routes.autoscout import autoscout
 from routes.automobile import automobile
 from routes.subito import subito
+from routes.json_makes_model import jsonMakes, jsonModel
 
 app = Klein()
 
@@ -30,5 +31,15 @@ def subitoRoute(request):
     request.setHeader('Access-Control-Allow-Methods', 'GET')
     request.setHeader('Access-Control-Allow-Headers', 'x-prototype-version,x-requested-with')
     return subito(request)
+
+@app.route('/api/getMakes', methods=['GET'])
+def jsonMakesModelRoute(request):
+    request.setHeader('Access-Control-Allow-Origin', '*')
+    request.setHeader('Access-Control-Allow-Methods', 'GET')
+    request.setHeader('Access-Control-Allow-Headers', 'x-prototype-version,x-requested-with')
+    brand = request.args.get(b'brand')
+    if(brand is None):
+        return jsonMakes()
+    return jsonModel(brand[0].decode())
 
 resource = app.resource

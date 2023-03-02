@@ -11,21 +11,44 @@ class AutoscoutSpider(scrapy.Spider):
     def parse(self, response):
         jdata = json.loads(response.css('script#__NEXT_DATA__::text').extract_first())
         for i, cars in enumerate(jdata["props"]["pageProps"]["listings"]):
+            details = cars.get("vehicleDetails", [])
+            vehicle = cars.get("vehicle")
             yield {
                 "index": i,
                 'id': cars["id"],
-                'title': cars["vehicle"]['make']+" "+cars["vehicle"]['model']+" - "+cars["vehicle"]['modelVersionInput'] or None,
-                'price': int(cars["tracking"]['price']) or None,
+                'title': vehicle.get("make")+" "+vehicle.get("model")+" - "+vehicle.get("modelVersionInput") if vehicle != None else None,
+                'price': int(cars.get("tracking").get("price")) or None,
                 'link': "https://www.autoscout24.fr"+cars['url'] or None,
-                'kilometer': cars["vehicleDetails"][0] or None,
-                'registration': cars["vehicleDetails"][1] or None,
-                'power': cars["vehicleDetails"][2] or None,
-                'status': cars["vehicleDetails"][3] or None,
-                'gear': cars["vehicleDetails"][5] or None,
-                'energy': cars["vehicleDetails"][6] if type(cars["vehicleDetails"][6]) == str else "",
-                'consumption': cars["vehicleDetails"][7]["data"] or None,
-                'emission': cars["vehicleDetails"][8]["data"] or None,
-                'imgPath': cars["images"][0].replace('/250x188.webp','') if len(cars["images"]) else None,
+                'kilometer': self.getDataString(details[0]),
+                'registration': self.getDataString(details[1]),
+                'power': self.getDataString(details[2]),
+                'status': self.getDataString(details[3]),
+                'gear': self.getDataString(details[5]),
+                'energy': self.getDataString(details[6]),
+                'consumption':  self.getConsumption(details),
+                'emission': self.getEmission(details),
+                'imgPath': cars.get("images")[0].replace('/250x188.webp','') if len(cars["images"])>0 else None,
                 'webSite': "autoscout",
                 "pages": int(response.css('ul li.pagination-item *::text').extract()[-1])
             }
+
+    def getDataString(self, obj):
+        if(type(obj) == str):
+            return obj
+        elif obj != None:
+            return obj.get('data')
+        else: 
+            return None
+
+    def getConsumption(self, obj):
+        value = obj[7].get('data') if obj[7] != None else None
+        if type(value) == str:
+            consum = value.split("|")
+            return consum[1] if len(consum) >1 else None
+        return value
+    
+    def getEmission(self, obj):
+        value = obj[7].get('data') if obj[7] != None else None
+        if type(value) == str:
+            return value.split("|")[0] or None
+        return value
